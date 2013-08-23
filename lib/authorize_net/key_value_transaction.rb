@@ -166,7 +166,7 @@ module AuthorizeNet
 				country: order.billing_country,
 				phone: order.phone,
 				email: order.email,
-				cust_id: (order.user ? "LUCK#{user.id}" : "LUCKGUEST"),
+				cust_id: (order.user ? "LUCK#{order.user.id}" : "LUCKGUEST"),
 				ship_to_address: order.shipping_street_address_1 + " " + order.shipping_street_address_2,
 				ship_to_city: order.shipping_city,
 				ship_to_state: order.shipping_state,
