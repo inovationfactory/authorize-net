@@ -152,10 +152,8 @@ module AuthorizeNet
       run
     end
 
-    def purchase_for_order(order, credit_card, options = {})
+    def purchase_for_order(order, credit_card)
       handle_payment_argument(credit_card)
-      options = @@purchase_option_defaults.merge(options)
-      handle_cavv_options(options)
       set_fields({
 				amount: order.total.to_s,
 				invoice_num: "LUCK#{order.id}",
