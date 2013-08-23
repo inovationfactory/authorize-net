@@ -151,6 +151,33 @@ module AuthorizeNet
       self.type = Type::AUTHORIZE_AND_CAPTURE
       run
     end
+
+    def purchase_for_order(order, credit_card, options = {})
+      handle_payment_argument(credit_card)
+      options = @@purchase_option_defaults.merge(options)
+      handle_cavv_options(options)
+      set_fields(
+				amount: order.total,
+				invoice_num: "LUCK#{order.id}",
+				first_name: order.first_name,
+				last_name: order.last_name,
+				address: order.billing_street_address_1,
+				city: order.billing_city,
+				state: order.billing_state,
+				zip: order.billing_zip_code,
+				country: order.billing_country,
+				phone: order.phone,
+				email: order.email,
+				cust_id: (order.user ? "LUCK#{user.id}" : "LUCKGUEST",
+				ship_to_address: order.shipping_address_1 + " " + order.shipping_address_2,
+				ship_to_city: order.shipping_city,
+				ship_to_state: order.shipping_state,
+				ship_to_zip: order.shipping_zip_code,
+				ship_to_country: order.shipping_country
+			)
+      self.type = Type::AUTHORIZE_AND_CAPTURE
+      run
+    end
     
     # Sets up and submits a refund (CREDIT) transaction. Returns a response object. If the transaction
     # has already been run, it will return nil.
