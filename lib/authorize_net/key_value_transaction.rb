@@ -157,7 +157,7 @@ module AuthorizeNet
       options = @@purchase_option_defaults.merge(options)
       handle_cavv_options(options)
       set_fields({
-				amount: order.total,
+				amount: order.total.to_s,
 				invoice_num: "LUCK#{order.id}",
 				first_name: order.first_name,
 				last_name: order.last_name,
