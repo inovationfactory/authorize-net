@@ -156,7 +156,7 @@ module AuthorizeNet
       handle_payment_argument(credit_card)
       options = @@purchase_option_defaults.merge(options)
       handle_cavv_options(options)
-      set_fields(
+      set_fields({
 				amount: order.total,
 				invoice_num: "LUCK#{order.id}",
 				first_name: order.first_name,
@@ -174,7 +174,7 @@ module AuthorizeNet
 				ship_to_state: order.shipping_state,
 				ship_to_zip: order.shipping_zip_code,
 				ship_to_country: order.shipping_country
-			)
+			})
       self.type = Type::AUTHORIZE_AND_CAPTURE
       run
     end
