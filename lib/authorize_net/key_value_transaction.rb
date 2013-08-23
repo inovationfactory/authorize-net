@@ -169,7 +169,7 @@ module AuthorizeNet
 				phone: order.phone,
 				email: order.email,
 				cust_id: (order.user ? "LUCK#{user.id}" : "LUCKGUEST"),
-				ship_to_address: order.shipping_address_1 + " " + order.shipping_address_2,
+				ship_to_address: order.shipping_street_address_1 + " " + order.shipping_address_2,
 				ship_to_city: order.shipping_city,
 				ship_to_state: order.shipping_state,
 				ship_to_zip: order.shipping_zip_code,
