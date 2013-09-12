@@ -155,7 +155,7 @@ module AuthorizeNet
     def purchase_for_order(order, credit_card)
       handle_payment_argument(credit_card)
       set_fields({
-				amount: order.total.to_s,
+				amount: order.full_price.to_s,
 				invoice_num: "LUCK#{order.id}",
 				first_name: order.first_name,
 				last_name: order.last_name,
