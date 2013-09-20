@@ -196,7 +196,7 @@ module AuthorizeNet
 				ship_to_address: order.shipping_address.street_address_1 + " " + order.shipping_address.street_address_2,
 				ship_to_city: order.shipping_address.city,
 				ship_to_state: order.shipping_address.state,
-				ship_to_zip: order.shipping_address.zip_code,
+				ship_to_zip: order.shipping_address.zipcode,
 				ship_to_country: order.shipping_address.country
 			})
       self.type = Type::AUTHORIZE_AND_CAPTURE
