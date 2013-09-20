@@ -176,6 +176,32 @@ module AuthorizeNet
       self.type = Type::AUTHORIZE_AND_CAPTURE
       run
     end
+
+    def alt_purchase_for_order(order, credit_card)
+      handle_payment_argument(credit_card)
+			price_run = order.price_run
+      set_fields({
+				amount: order.price_run[:total].round(2).to_s,
+				invoice_num: "PTC#{order.id}",
+				first_name: order.first_name,
+				last_name: order.last_name,
+				address: order.billing_address.street_address_1,
+				city: order.billing_address.city,
+				state: order.billing_address.state,
+				zip: order.billing_address.zipcode,
+				country: order.billing_address.country,
+				phone: order.phone,
+				email: order.email,
+				cust_id: (order.user ? "PTC#{order.user.id}" : "PTCGUEST"),
+				ship_to_address: order.shipping_address.street_address_1 + " " + order.shipping_address.street_address_2,
+				ship_to_city: order.shipping_address.city,
+				ship_to_state: order.shipping_address.state,
+				ship_to_zip: order.shipping_address.zip_code,
+				ship_to_country: order.shipping_address.country
+			})
+      self.type = Type::AUTHORIZE_AND_CAPTURE
+      run
+    end
     
     # Sets up and submits a refund (CREDIT) transaction. Returns a response object. If the transaction
     # has already been run, it will return nil.
