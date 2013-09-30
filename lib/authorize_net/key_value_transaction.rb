@@ -177,12 +177,12 @@ module AuthorizeNet
       run
     end
 
-    def alt_purchase_for_order(order, credit_card)
+    def alt_purchase_for_order(order, credit_card, prefix = 'PTC')
       handle_payment_argument(credit_card)
 			price_run = order.price_run
       set_fields({
 				amount: order.price_run[:total].round(2).to_s,
-				invoice_num: "PTC#{order.id}",
+				invoice_num: "#{prefix}#{order.id}",
 				first_name: order.first_name,
 				last_name: order.last_name,
 				address: order.billing_address.street_address_1,
