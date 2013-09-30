@@ -192,7 +192,7 @@ module AuthorizeNet
 				country: order.billing_address.country,
 				phone: order.phone,
 				email: order.email,
-				cust_id: (order.user ? "PTC#{order.user.id}" : "PTCGUEST"),
+				cust_id: (order.user ? "#{prefix}#{order.user.id}" : "#{prefix}GUEST"),
 				ship_to_address: order.shipping_address.street_address_1 + " " + order.shipping_address.street_address_2,
 				ship_to_city: order.shipping_address.city,
 				ship_to_state: order.shipping_address.state,
